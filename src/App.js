@@ -5,7 +5,6 @@ import NewItem from './pages/NewItem';
 import DisplayAllLists from './pages/DisplayAllLists';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-
 function App() {
   return (
     <Router>

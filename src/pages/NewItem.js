@@ -1,25 +1,30 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, Redirect } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import NewShopping from '../img/newShopping.svg';
 import nextId from 'react-id-generator';
 import { useDispatch, useSelector } from 'react-redux';
 import { addList, editList } from '../actions/listAction';
-// import { Store } from '@msaterial-ui/icons';
+
+// function checkName(name) {
+//   if (!name) {
+//     return <Redirect to='/' />;
+//   }
+// }
 
 
 const NewItem = () => {
+
+  const location = useLocation();
+
+  // checkName(location.listName);
 
   const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
 
-  const location = useLocation();
-  // jeśli lista już istnieje to dostajemy jej id
-  //jak wbijemy bezpośrednio to jest error, bo location.state = undefined i nie
-  // wiem co z tym zrobić
-  const { listName, id, button } = location.state;
+  const { listName, id, button } = location.state ?? { listName: '', id: null, button: true };
 
   const [buttonState, setButtonState] = useState(button);
 
@@ -57,6 +62,10 @@ const NewItem = () => {
     }
   }
 
+  if (!listName) {
+    return <Redirect to="/" />
+  }
+
   return (
     <section className="container">
       <div className="list-name">{listName === "" ? "New List" : listName}</div>
@@ -81,10 +90,11 @@ const NewItem = () => {
 
         {buttonState && <Link to={'/list/display'}><button onClick={() => onAddToList()} className="btn btn-light w-100">Save</button></Link>}
 
-
-        <div className='list-display'>
-          {buttonState && <ProductList items={items} onDelete={deleteItem} />}
-        </div>
+        {buttonState &&
+          <div className='list-display'>
+            <ProductList items={items} onDelete={deleteItem} />
+          </div>
+        }
 
       </div>
     </section >);
