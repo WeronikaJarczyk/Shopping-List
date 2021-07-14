@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../img/undraw_shopping_app_flsj.svg';
-// import Animation from '../components/Animation';
+import Nav from '../components/Nav';
 
 
 const HomePage = () => {
@@ -23,6 +23,7 @@ const HomePage = () => {
 
   return (
     <section>
+      <Nav />
       <div className="container">
         <img src={img} className="img-md" alt="" />
         <div className="input-group">

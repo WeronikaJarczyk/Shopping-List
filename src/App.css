@@ -8,20 +8,35 @@
   color:#222;
   text-decoration: none;
 }
+small {
+  transition: 0.3s ease-in-out;
+}
 
 form {
   margin-bottom: 10px;
+  position: relative;
 }
 
 nav {
+  display: flex;
   padding: 10px 20px;
-  background-color: white; 
+  background-color:#fff; 
+  justify-content:space-between;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.register-link{
+  margin-top: 15px;
 }
 
 .navbar .nav-brand {
@@ -33,6 +48,7 @@ nav {
   font-size: 16px;
   transition: 0.3s ease-in-out;
 }
+
 
 .on-hover:hover {
   color: #544AC1;
@@ -86,12 +102,20 @@ input:focus, textarea:focus, select:focus {
 }
 
 .input-group {
-  /* background-color: #544AC1; */
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
   gap: 10px;
+}
+
+.input-group-wide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  gap: 10px;
+  width: 350px;
 }
 
 .text {
@@ -112,18 +136,17 @@ select option {
 .text-left {
   text-align: start;
 }
+.sm {
+  width: 80px;
+}
 
 .btn {
   border: none;
   transition: 0.4s ease-in-out;
 }
 
-.bg-light {
-/* background-image: url("./img/Subtle-Prism.svg"); */
-}
-
 .btn-light:hover{
-  background-color: rgb(237, 112, 112);
+  background-color: #ed7070;
   color: white;
   border: none;
 }
@@ -133,7 +156,6 @@ select option {
   color: white;
   border: none;
 }
-
 
 .list-name {
   font-size: 32px;

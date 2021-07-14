@@ -13,22 +13,20 @@ export const addList = (elems, listName) => {
   }
 }
 
-export const delList = (id, lists) => {
+export const delList = (id) => {
   return {
     type: 'DELETE_LISTS',
     payload: {
       id: id,
-      lists: lists
     }
   };
 }
 
-export const editList = (items, id, lists) => {
+export const editList = (items, id) => {
   return {
     type: 'EDIT_LISTS',
     payload: {
       id: id,
-      lists: lists,
       items: items
     }
   };
