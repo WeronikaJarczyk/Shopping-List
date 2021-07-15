@@ -1,20 +1,28 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import DisplayList from '../components/DisplayList';
-import { useDispatch } from 'react-redux';
-import { delList } from '../actions/listAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { delList, settList } from '../actions/listAction';
 import NoListImage from '../components/NoListsImage';
 import Nav from '../components/Nav';
-
+import { DB_DeleteList, DB_DisplayList } from '../DB_requests';
 
 const DisplayAllLists = () => {
 
-  const lists = useSelector(state => state.list);
-
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    (async () => {
+      const displayListResponse = await DB_DisplayList();
+      dispatch(settList(displayListResponse.lists));
+    })();
+  });
+
+  const lists = useSelector(state => state.list);
+
+
   const deleteList = (id) => {
-    dispatch(delList(id, lists));
+    DB_DeleteList(id)
+      .then(dispatch(delList(id, lists)));
   }
 
   return (

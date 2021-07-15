@@ -3,11 +3,12 @@ import React from 'react';
 import ProductListItem from './ProductListItem';
 
 const ProductList = ({ items, onDelete }) => {
+  console.log(items);
 
   return (
     <div>
-      {items.map((el) => {
-        return <ProductListItem key={el.id} listItem={el} onDelete={onDelete} />
+      {items.map((item) => {
+        return <ProductListItem key={item.id} listItem={item} onDelete={onDelete} />
       })}
     </div>
   )

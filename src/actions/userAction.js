@@ -6,3 +6,9 @@ export const setToken = (token) => {
     }
   };
 }
+
+export const gettToken = () => {
+  return {
+    type: 'GET_TOKEN',
+  };
+}

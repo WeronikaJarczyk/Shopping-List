@@ -8,9 +8,7 @@ import reducer from './reducers/index';
 import { Provider } from 'react-redux';
 import { loadState, saveState } from './localStorage';
 
-
 const persistedState = {
-  list: loadState()?.lists,
   user: loadState()?.user
 };
 
@@ -19,7 +17,6 @@ const store = createStore(reducer, persistedState,
 
 store.subscribe(() => {
   saveState({
-    lists: store.getState().list,
     user: store.getState().user
   });
 });

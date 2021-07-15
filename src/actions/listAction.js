@@ -1,13 +1,11 @@
-import nextId from 'react-id-generator';
-
-export const addList = (elems, listName) => {
-  if (elems.length !== 0) {
+export const addList = (items, listName, id) => {
+  if (items.length !== 0) {
     return {
-      type: 'SET_LISTS',
+      type: 'ADD_LISTS',
       payload: {
-        id: nextId(),
+        id,
         name: listName,
-        elems,
+        items,
       }
     };
   }
@@ -28,6 +26,15 @@ export const editList = (items, id) => {
     payload: {
       id: id,
       items: items
+    }
+  };
+}
+
+export const settList = (lists) => {
+  return {
+    type: 'SET_LISTS',
+    payload: {
+      lists
     }
   };
 }

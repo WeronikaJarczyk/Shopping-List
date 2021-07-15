@@ -7,12 +7,6 @@ import DisplayAllLists from './pages/DisplayAllLists';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 
-function isLoggedIn() {
-  // sprawdzić czy user zalogowany:
-  // W loginPage cos zrobić, jakos przesłać info i na tej podstawie true/false
-  return true;
-}
-
 function App() {
   return (
     <Router>

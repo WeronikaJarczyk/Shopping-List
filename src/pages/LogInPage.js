@@ -13,9 +13,8 @@ const LogInPage = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
+    // to teź jakoś wywalić do pliku osobnego
     const body = JSON.stringify(data);
-
-    console.log(body);
 
     fetch('/users/login', {
       method: 'POST',
@@ -26,7 +25,7 @@ const LogInPage = () => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log('Success:', json);
+        // console.log('Success:', json);
         dispatch(setToken(json.accessToken));
         history.push('/home');
       })

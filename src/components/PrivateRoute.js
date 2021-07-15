@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-function isLoggedIn() {
-  // sprawdzić czy user zalogowany:
-  // W loginPage cos zrobić, jakos przesłać info i na tej podstawie true/false
-  return true;
+const isLoggedIn = () => {
+  const token = JSON.parse(localStorage.getItem('state'));
+  return (token?.user);
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

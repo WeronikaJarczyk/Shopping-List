@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 
 function Nav() {
+  const history = useHistory();
 
   function logOut() {
-    // wywalić token? 
-    // jakby był w localStorage to zupdateuje się też redux store i na w app.js również
-    // clear stor
-    // chyba
+    localStorage.clear();
+    history.push('/');
   }
 
   return (

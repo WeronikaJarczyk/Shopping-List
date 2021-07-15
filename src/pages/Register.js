@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import img from '../img/Profile.svg';
 
 const LogInPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-
   let history = useHistory();
 
   const onSubmit = (data) => {
+    // nie wiem jak to wywalić do osobnego pliku, bo nie można mieć hooka w zwykłej funkcji
     if (data.password === data.repeatPassword) {
       fetch('/users', {
         method: 'POST',
@@ -20,7 +20,6 @@ const LogInPage = () => {
       })
         .then(response => response.json())
         .then(json => {
-          console.log('Success:', json);
           history.push('/');
         })
         .catch((error) => {

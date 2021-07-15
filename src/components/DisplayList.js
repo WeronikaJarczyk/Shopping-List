@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const ProductList = ({ arr, onDelete }) => {
-  const { id, name, elems } = arr;
+  const { id, name, items } = arr;
 
   return (
     <div className="card">
@@ -17,7 +17,7 @@ const ProductList = ({ arr, onDelete }) => {
         </div>
       </h3>
       <div className="card-body">
-        {elems.map((el) => <DisplayListItem key={el.id} listItem={el} />)}
+        {items.map((el) => <DisplayListItem key={el.id} listItem={el} />)}
       </div>
     </div>
   )

@@ -4,6 +4,8 @@ const userReducer = (state = {}, action) => {
     case 'SET_TOKEN':
       state = action.payload;
       return state;
+    case 'GET_TOKEN':
+      return state;
     default:
       return state;
   }

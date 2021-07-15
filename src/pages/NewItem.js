@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { useLocation, Link, Redirect } from 'react-router-dom';
+import { useLocation, Redirect, useHistory } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import NewShopping from '../img/newShopping.svg';
 import nextId from 'react-id-generator';
 import { useDispatch, useSelector } from 'react-redux';
 import { addList, editList } from '../actions/listAction';
 import Nav from '../components/Nav';
-
+import { DB_AddList, DB_EditList } from '../DB_requests';
 
 const NewItem = () => {
 
@@ -25,16 +25,26 @@ const NewItem = () => {
   let listItem = [];
 
   if (id) {
-    listItem = lists.filter(arr => arr.id === id)[0].elems;
+    listItem = lists.filter(arr => arr.id === id)[0].items;
   }
 
   const [items, setItems] = useState(listItem);
 
-  const onAddToList = () => {
+  const history = useHistory();
+
+  const onAddToList = async () => {
     if (id) {
-      dispatch(editList(items, id));
+      const editResponse = await DB_EditList(items, id);
+
+      dispatch(editList(editResponse.items, id));
+
+      history.push('/list/display');
     } else {
-      dispatch(addList(items, listName));
+      DB_AddList(items, listName)
+        .then((data) => {
+          dispatch(addList(data.items, data.name, data._id));
+        })
+        .then(history.push('/list/display'));
     }
   }
 
@@ -82,7 +92,7 @@ const NewItem = () => {
           </form>
 
 
-          {buttonState && <Link to={'/list/display'}><button onClick={() => onAddToList()} className="btn btn-light w-100">Save</button></Link>}
+          {buttonState && <button onClick={() => onAddToList()} className="btn btn-light w-100">Save</button>}
 
           {buttonState &&
             <div className='list-display'>
