@@ -1,12 +1,16 @@
 import { Link, useHistory } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import { setList } from '../actions/listAction';
+import { useDispatch } from 'react-redux';
 
 function Nav() {
   const history = useHistory();
 
+  const dispatch = useDispatch();
+
   function logOut() {
     localStorage.clear();
+    dispatch(setList([]));
     history.push('/');
   }
 
