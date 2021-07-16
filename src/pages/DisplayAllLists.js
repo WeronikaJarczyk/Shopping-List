@@ -15,24 +15,25 @@ const DisplayAllLists = () => {
       const displayListResponse = await DB_DisplayList();
       dispatch(settList(displayListResponse.lists));
     })();
-  });
+  }, []);
 
   const lists = useSelector(state => state.list);
 
 
-  const deleteList = (id) => {
-    DB_DeleteList(id)
-      .then(dispatch(delList(id, lists)));
+  const deleteList = (_id) => {
+    DB_DeleteList(_id)
+      .then(dispatch(delList(_id, lists)));
   }
 
   return (
     <>
       <Nav />
+      {console.log("loop?")}
       <div className="">
         <div className="container">
           {
             lists.length ? lists.map((arr) => {
-              return <DisplayList key={arr.id} arr={arr} onDelete={deleteList} />
+              return <DisplayList key={arr._id} arr={arr} onDelete={deleteList} />
             }) : <NoListImage />
           }
         </div>

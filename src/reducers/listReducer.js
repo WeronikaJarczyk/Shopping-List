@@ -4,9 +4,9 @@ const listReducer = (state = [], action) => {
     case 'ADD_LISTS':
       return [...state, action.payload];
     case 'DELETE_LISTS':
-      return state.filter(arr => arr.id !== action.payload.id);
+      return state.filter(arr => arr._id !== action.payload._id);
     case 'EDIT_LISTS':
-      state.find(arr => arr.id === action.payload.id)
+      state.find(arr => arr._id === action.payload._id)
         .items = action.payload.items;
       return state;
     case 'SET_LISTS':

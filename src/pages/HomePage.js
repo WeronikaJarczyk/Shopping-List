@@ -28,7 +28,7 @@ const HomePage = () => {
         <img src={img} className="img-md" alt="" />
         <div className="input-group">
           <input className="input" type="text" placeholder="Name Your List" onChange={addName} />
-          {buttonState && <Link to={{ pathname: "/list", state: { listName: name, id: null, button: false } }}><button className="btn btn-dark">Create New List</button></Link>}
+          {buttonState && <Link to={{ pathname: "/list", state: { listName: name, _id: null, button: false } }}><button className="btn btn-dark">Create New List</button></Link>}
         </div>
       </div>
     </section>

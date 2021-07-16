@@ -19,10 +19,10 @@ export async function DB_AddList(items, listName) {
   }
 }
 // edit list
-export async function DB_EditList(items, id) {
+export async function DB_EditList(items, _id) {
 
   try {
-    const body = JSON.stringify({ items, id });
+    const body = JSON.stringify({ items, _id });
     const data = await fetch('/lists/edit', {
       method: 'POST',
       body,
@@ -38,10 +38,10 @@ export async function DB_EditList(items, id) {
 }
 
 // delete list
-export async function DB_DeleteList(id) {
+export async function DB_DeleteList(_id) {
 
   try {
-    const body = JSON.stringify({ id });
+    const body = JSON.stringify({ _id });
     await fetch('/lists/delete', {
       method: 'POST',
       body,

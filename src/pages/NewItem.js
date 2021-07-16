@@ -17,15 +17,15 @@ const NewItem = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const { listName, id, button } = location.state ?? { listName: '', id: null, button: true };
+  const { listName, _id, button } = location.state ?? { listName: '', _id: null, button: true };
 
   const [buttonState, setButtonState] = useState(button);
 
   const lists = useSelector(state => state.list);
   let listItem = [];
 
-  if (id) {
-    listItem = lists.filter(arr => arr.id === id)[0].items;
+  if (_id) {
+    listItem = lists.filter(arr => arr._id === _id)[0].items;
   }
 
   const [items, setItems] = useState(listItem);
@@ -33,10 +33,10 @@ const NewItem = () => {
   const history = useHistory();
 
   const onAddToList = async () => {
-    if (id) {
-      const editResponse = await DB_EditList(items, id);
+    if (_id) {
+      const editResponse = await DB_EditList(items, _id);
 
-      dispatch(editList(editResponse.items, id));
+      dispatch(editList(editResponse.items, _id));
 
       history.push('/list/display');
     } else {
@@ -56,8 +56,8 @@ const NewItem = () => {
     }
   }
 
-  const deleteItem = (id) => {
-    const updatedItems = items.filter(task => task.id !== id);
+  const deleteItem = (_id) => {
+    const updatedItems = items.filter(task => task._id !== _id);
     setItems(updatedItems);
     if (!updatedItems.length) {
       setButtonState(false);

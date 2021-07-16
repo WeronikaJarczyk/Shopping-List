@@ -1,9 +1,9 @@
-export const addList = (items, listName, id) => {
+export const addList = (items, listName, _id) => {
   if (items.length !== 0) {
     return {
       type: 'ADD_LISTS',
       payload: {
-        id,
+        _id,
         name: listName,
         items,
       }
@@ -11,20 +11,20 @@ export const addList = (items, listName, id) => {
   }
 }
 
-export const delList = (id) => {
+export const delList = (_id) => {
   return {
     type: 'DELETE_LISTS',
     payload: {
-      id: id,
+      _id,
     }
   };
 }
 
-export const editList = (items, id) => {
+export const editList = (items, _id) => {
   return {
     type: 'EDIT_LISTS',
     payload: {
-      id: id,
+      _id,
       items: items
     }
   };
