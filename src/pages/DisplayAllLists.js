@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import DisplayList from '../components/DisplayList';
 import { useDispatch, useSelector } from 'react-redux';
-import { delList, settList } from '../actions/listAction';
+import { delList, setList } from '../actions/listAction';
 import NoListImage from '../components/NoListsImage';
 import Nav from '../components/Nav';
 import { DB_DeleteList, DB_DisplayList } from '../DB_requests';
@@ -13,7 +13,7 @@ const DisplayAllLists = () => {
   useEffect(() => {
     (async () => {
       const displayListResponse = await DB_DisplayList();
-      dispatch(settList(displayListResponse.lists));
+      dispatch(setList(displayListResponse.lists));
     })();
   }, []);
 

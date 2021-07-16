@@ -30,7 +30,7 @@ export const editList = (items, _id) => {
   };
 }
 
-export const settList = (lists) => {
+export const setList = (lists) => {
   return {
     type: 'SET_LISTS',
     payload: {
