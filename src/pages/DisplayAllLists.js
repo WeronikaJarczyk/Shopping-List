@@ -19,7 +19,6 @@ const DisplayAllLists = () => {
 
   const lists = useSelector(state => state.list);
 
-
   const deleteList = (_id) => {
     DB_DeleteList(_id)
       .then(dispatch(delList(_id, lists)));
@@ -28,7 +27,6 @@ const DisplayAllLists = () => {
   return (
     <>
       <Nav />
-      {console.log("loop?")}
       <div className="">
         <div className="container">
           {

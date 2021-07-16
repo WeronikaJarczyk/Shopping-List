@@ -18,7 +18,6 @@ const HomePage = () => {
     } else {
       setButtonState(false);
     }
-
   }
 
   return (
