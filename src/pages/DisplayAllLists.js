@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DisplayList from '../components/DisplayList';
 import { useDispatch, useSelector } from 'react-redux';
 import { delList, setList } from '../actions/listAction';
@@ -10,10 +10,13 @@ const DisplayAllLists = () => {
 
   const dispatch = useDispatch();
 
+  const [shouldDisplay, setShouldDisplay] = useState(false);
+
   useEffect(() => {
     (async () => {
       const displayListResponse = await DB_DisplayList();
       dispatch(setList(displayListResponse.lists));
+      setShouldDisplay(true);
     })();
   }, []);
 
@@ -24,15 +27,16 @@ const DisplayAllLists = () => {
       .then(dispatch(delList(_id, lists)));
   }
 
+
   return (
     <>
       <Nav />
       <div className="">
         <div className="container">
-          {
-            lists.length ? lists.map((arr) => {
+          {shouldDisplay &&
+            (lists.length ? lists.map((arr) => {
               return <DisplayList key={arr._id} arr={arr} onDelete={deleteList} />
-            }) : <NoListImage />
+            }) : <NoListImage />)
           }
         </div>
       </div>
