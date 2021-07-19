@@ -1,30 +1,37 @@
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import img from '../img/Profile.svg';
+import { addNotification } from '../addNotification';
 
-const LogInPage = () => {
+const Register = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   let history = useHistory();
 
-  const onSubmit = (data) => {
-    // nie wiem jak to wywalić do osobnego pliku, bo nie można mieć hooka w zwykłej funkcji
-    if (data.password === data.repeatPassword) {
-      fetch('/users', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-        },
-      })
-        .then(response => response.json())
-        .then(json => {
-          history.push('/');
-        })
-        .catch((error) => {
-          console.error('Error:', error);
+  const onSubmit = async (data) => {
+    try {
+      if (data.password === data.repeatPassword) {
+        const response = await fetch('/users', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
         });
+        const json = await response.json();
+
+        if (json.message === "User already exists") {
+          addNotification("Error", json.message, "danger");
+        } else {
+          addNotification("Thank You", json.message, "success");
+          history.push('/');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      addNotification("Error", "Unable to save to database", "danger");
     }
   }
 
@@ -43,9 +50,12 @@ const LogInPage = () => {
             <input type="submit" className="btn btn-light w-100" value="Register" />
           </div>
         </form>
+        <div className="register-link">
+          <Link to={{ pathname: "/" }}><small className='on-hover'>Log In</small></Link>
+        </div>
       </div >
     </section >
   );
 }
 
-export default LogInPage
+export default Register;

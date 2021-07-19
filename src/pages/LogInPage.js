@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import img from '../img/unlock.svg';
 import { setToken } from '../actions/userAction';
 import { useDispatch } from 'react-redux';
+import { addNotification } from '../addNotification';
 
 const LogInPage = () => {
 
@@ -12,27 +13,31 @@ const LogInPage = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    // to teź jakoś wywalić do pliku osobnego
-    const body = JSON.stringify(data);
+  const onSubmit = async (data) => {
+    try {
+      const body = JSON.stringify(data);
 
-    fetch('/users/login', {
-      method: 'POST',
-      body,
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then(response => response.json())
-      .then(json => {
-        // console.log('Success:', json);
+      const response = await fetch('/users/login', {
+        method: 'POST',
+        body,
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const json = await response.json();
+
+      if (json.message === "success") {
         dispatch(setToken(json.accessToken));
         history.push('/home');
-      })
-      .catch((error) => {
-        console.error('Error:', error.message);
-      });
+      } else {
+        addNotification("Error", json.message, "danger");
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+      addNotification("Error", "Please, try again later", "danger");
+    }
   }
+
   return (
     <section>
       <div className="container">
@@ -54,4 +59,4 @@ const LogInPage = () => {
   );
 }
 
-export default LogInPage
+export default LogInPage;
