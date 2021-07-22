@@ -15,7 +15,7 @@ const NewItem = () => {
 
   const dispatch = useDispatch();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm({ defaultValues: { text: "" } });
 
   const { listName, _id, button } = location.state ?? { listName: '', _id: null, button: true };
 
@@ -40,23 +40,26 @@ const NewItem = () => {
 
       history.push('/list/display');
     } else {
-      DB_AddList(items, listName)
-        .then((data) => {
-          dispatch(addList(data.items, data.name, data._id));
-        })
-        .then(history.push('/list/display'));
+      const data = await DB_AddList(items, listName);
+
+      dispatch(addList(data.newList.items, data.newList.name, data.newList._id));
+
+      history.push('/list/display');
     }
   }
 
   const onSubmit = (data) => {
     if (data.item === "" || data.amount === "") {
     } else {
-      setItems([...items, { ...data, id: nextId() }]);
+      const _id = nextId();
+      setItems([...items, { ...data, _id }]);
       setButtonState(true);
+      reset({ text: '' });
     }
   }
 
   const deleteItem = (_id) => {
+    console.log(_id);
     const updatedItems = items.filter(task => task._id !== _id);
     setItems(updatedItems);
     if (!updatedItems.length) {
