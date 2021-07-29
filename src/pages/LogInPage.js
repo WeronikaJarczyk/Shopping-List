@@ -24,9 +24,10 @@ const LogInPage = () => {
           "Content-type": "application/json",
         },
       });
+
       const json = await response.json();
 
-      if (json.message === "success") {
+      if (response.ok) {
         dispatch(setToken(json.accessToken));
         history.push('/home');
       } else {
@@ -45,10 +46,9 @@ const LogInPage = () => {
         <img src={img} className="img-md" alt="" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group-wide">
-            <input className="input w-100" type="text" placeholder="Login" {...register('login', { required: true })} />
-            {errors.login && "Login is required"}
-            <input className="input w-100" type="password" placeholder="Password" {...register('password', { required: true })} />
-            <input type="submit" className="btn btn-light w-100" value="Log In" />
+            <input id="login" className="input w-100" type="text" placeholder="Login" {...register('login', { required: true })} />
+            <input id="password" className="input w-100" type="password" placeholder="Password" {...register('password', { required: true })} />
+            <input id="button" type="submit" className="btn btn-light w-100" value="Log In" />
           </div>
         </form>
         <div className="register-link">

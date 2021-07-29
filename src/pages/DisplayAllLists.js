@@ -27,21 +27,20 @@ const DisplayAllLists = () => {
       .then(dispatch(delList(_id, lists)));
   }
 
-
   return (
     <>
       <Nav />
-      <div className="">
+      {!shouldDisplay &&
         <div className="container">
-          {shouldDisplay &&
-            (lists.length ? lists.map((arr) => {
-              return <DisplayList key={arr._id} arr={arr} onDelete={deleteList} />
-            }) : <NoListImage />)
+          {(lists.length ? lists.map((arr) => {
+            return <DisplayList key={arr._id} arr={arr} onDelete={deleteList} />
+          }) : <NoListImage />)
           }
         </div>
-      </div>
+      }
     </>
   )
 }
+
 
 export default DisplayAllLists;

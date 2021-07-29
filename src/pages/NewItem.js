@@ -90,7 +90,7 @@ const NewItem = () => {
                   <option value='l'>Liter</option>
                 </select>
               </div>
-              <input type='submit' className='btn btn-dark w-100' value='Add To List' />
+              <input id="button" type='submit' className='btn btn-dark w-100' value='Add To List' />
             </div>
           </form>
 

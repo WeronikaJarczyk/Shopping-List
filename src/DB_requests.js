@@ -30,7 +30,7 @@ export async function DB_EditList(items, _id) {
         "Content-type": "application/json",
       },
     });
-    const json = data.json();
+    const json = await data.json();
     return json;
   } catch (error) {
     console.error('Error:', error.message);

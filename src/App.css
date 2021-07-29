@@ -217,6 +217,7 @@ select option {
   right: 10px;
 }
 
+
 @media only screen and (max-width: 600px) {
   .img-md {
     width: 250px;

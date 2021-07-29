@@ -8,7 +8,7 @@ const ProductList = ({ items, onDelete }) => {
   return (
     <div>
       {items.map((item) => {
-        return <ProductListItem key={item._id ? item._id : item.id} listItem={item} onDelete={onDelete} />
+        return <ProductListItem key={item._id ?? item.id} listItem={item} onDelete={onDelete} />
       })}
     </div>
   )

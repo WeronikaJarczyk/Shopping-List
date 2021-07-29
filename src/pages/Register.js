@@ -22,12 +22,14 @@ const Register = () => {
         });
         const json = await response.json();
 
-        if (json.message === "User already exists") {
-          addNotification("Error", json.message, "danger");
-        } else {
+        if (response.ok) {
           addNotification("Thank You", json.message, "success");
           history.push('/');
+        } else {
+          addNotification("Error", json.message, "danger");
         }
+      } else {
+        addNotification("Error", "Repeated password need to be exactly the same", "danger");
       }
     } catch (error) {
       console.log(error);
@@ -42,11 +44,11 @@ const Register = () => {
         <img src={img} className="img-md" alt="" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group-wide">
-            <input className="input w-100" type="text" placeholder="Login"  {...register('login', { required: true })} />
-            <input className="input w-100" type="email" placeholder="Email"  {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })} />
+            <input id="nameInput" className="input w-100" type="text" placeholder="Login"  {...register('login', { required: true })} />
+            <input id="emailInput" className="input w-100" type="email" placeholder="Email"  {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })} />
             {errors.email && "Enter correct email adress"}
-            <input className="input w-100" type="password" placeholder="Password" {...register('password', { required: true })} />
-            <input className="input w-100" type="password" placeholder="Repeat Password" {...register('repeatPassword', { required: true })} />
+            <input id="passwordInput" className="input w-100" type="password" placeholder="Password" {...register('password', { required: true })} />
+            <input id="passwordInputR" className="input w-100" type="password" placeholder="Repeat Password" {...register('repeatPassword', { required: true })} />
             <input type="submit" className="btn btn-light w-100" value="Register" />
           </div>
         </form>
