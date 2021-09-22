@@ -30,7 +30,7 @@ const DisplayAllLists = () => {
   return (
     <>
       <Nav />
-      {!shouldDisplay &&
+      {shouldDisplay &&
         <div className="container">
           {(lists.length ? lists.map((arr) => {
             return <DisplayList key={arr._id} arr={arr} onDelete={deleteList} />

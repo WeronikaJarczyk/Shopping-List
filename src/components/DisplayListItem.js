@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const ProductListItem = ({ listItem }) => {
+const DisplayListItem = ({ listItem }) => {
 
   const { item, amount, unit } = listItem;
 
@@ -12,4 +12,4 @@ const ProductListItem = ({ listItem }) => {
 };
 
 
-export default ProductListItem;
+export default DisplayListItem;

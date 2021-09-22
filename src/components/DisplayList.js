@@ -5,7 +5,7 @@ import DeleteButton from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
 
 
-const ProductList = ({ arr, onDelete }) => {
+const DisplayList = ({ arr, onDelete }) => {
   const { _id, name, items } = arr;
 
   return (
@@ -23,4 +23,4 @@ const ProductList = ({ arr, onDelete }) => {
   )
 }
 
-export default ProductList;
+export default DisplayList;

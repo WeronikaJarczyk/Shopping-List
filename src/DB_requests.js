@@ -67,6 +67,7 @@ export async function DB_DisplayList() {
       },
     });
     const json = await data.json();
+    console.log("its working here");
     return json;
   } catch (error) {
     console.error('Error:', error);
